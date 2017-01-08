@@ -10,7 +10,11 @@ var intersectExists = require('on-intersect/exists')
 var onViewport = require('on-intersect')
 var html = require('bel')
 
-var el = html`<h1 style="color: white">BECOME THE GOBLIN!</h1>`
+var el = html`
+  <h1 style="color: white">
+    BECOME THE GOBLIN!
+  </h1>
+`
 
 var main = html`
   <main>
