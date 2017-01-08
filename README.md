@@ -12,7 +12,7 @@ var html = require('bel')
 
 var el = html`
   <h1 style="color: white">
-    BECOME THE GOBLIN!
+    BEHOLD THE GOBLIN!
   </h1>
 `
 
@@ -20,6 +20,7 @@ var main = html`
   <main>
     <div style="height: 110vh"></div>
     ${el}
+    <div style="height: 110vh"></div>
   </main>
 `
 
@@ -28,7 +29,7 @@ document.body.appendChild(main)
 // observers should only be added _after_ the element is rendered on the DOM,
 // else it displeases the browser emperors and they _will_ warn you
 if (intersectExists()) {
-  onIntersect(el, onEnter, onExit)
+  var stopObserving = onIntersect(el, onEnter, onExit)
 }
 
 function onEnter (entry) {
@@ -43,11 +44,12 @@ function onEnter (entry) {
 
 function onExit (entry) {
   document.body.setAttribute('style', 'background-color: white')
+  stopObserving()
 }
 ```
 
 ## API
-### el = onViewport(elementOrObject, [onEnter|null], [onExit])
+### stopObserving = onViewport(elementOrObject, [onEnter|null], [onExit])
 Call a callback when an element intersects with another. Defaults to
 `document.body`. The first argument can either be an HTML Node or an object. If
 it's an object it must contain a `target` which is an HTML node. Options can be:
@@ -62,6 +64,9 @@ it's an object it must contain a `target` which is an HTML node. Options can be:
   that comes into view: [0, 0.25, 0.5, 0.75, 1]. Will call `onEnter` every time
   the threshold is passed. `threshold` defaults to 1.
 
+### stopObserving()
+Unregister the observer
+
 ### bool = intersectExists()
 Check if `window.InterSectionObserver` exists
 
@@ -70,8 +75,21 @@ Check if `window.InterSectionObserver` exists
 $ npm install on-intersect
 ```
 
+## See Also
+- [yoshuawuyts/nanoraf](https://github.com/yoshawuyts/nanoraf)
+- [yoshuawuyts/nanocomponent](https://github.com/yoshuawuyts/nanocomponent)
+- [yoshuawuyts/nanomorph](https://github.com/yoshuawuyts/nanomorph)
+- [yoshuawuyts/nanotick](https://github.com/yoshuawuyts/nanotick)
+- [bendrucker/document-ready](https://github.com/bendrucker/document-ready)
+- [shama/on-load](https://github.com/shama/on-load)
+- [shama/bel](https://github.com/shama/bel)
+
 ## Further Reading
 - [MDN/Intersection_Observer_API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+
+## Authors
+- [Finn Pauls](https://github.com/finnp)
+- [Yoshua Wuyts](https://github.com/yoshuawuyts)
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)

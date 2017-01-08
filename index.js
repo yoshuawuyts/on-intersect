@@ -5,7 +5,7 @@ var isDom = require('is-dom')
 module.exports = onViewport
 
 // Call back when an element intersects with another
-// (html|obj, fn?, fn?) -> null
+// (html|obj, fn?, fn?) -> fn
 function onViewport (elOrOpts, onEnter, onExit) {
   var opts = null
   var el = null
@@ -30,6 +30,10 @@ function onViewport (elOrOpts, onEnter, onExit) {
 
   var observer = new window.IntersectionObserver(handler, opts)
   observer.observe(el)
+
+  return function () {
+    observer.disconnect()
+  }
 
   function handler (entries, obs) {
     var entry = entries[0]
