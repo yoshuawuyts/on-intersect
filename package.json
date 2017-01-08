@@ -1,0 +1,32 @@
+{
+  "name": "on-intersect",
+  "version": "1.0.0",
+  "description": "Call back when an element intersects with another",
+  "main": "index.js",
+  "scripts": {
+    "deps": "dependency-check . && dependency-check . --extra --no-dev",
+    "start": "bankai start example",
+    "test": "standard && npm run deps",
+    "test:cov": "standard && npm run deps"
+  },
+  "repository": "yoshuawuyts/on-intersect",
+  "keywords": [
+    "intersect",
+    "intersect",
+    "dom",
+    "api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "global": "^4.3.1",
+    "is-dom": "^1.0.7"
+  },
+  "devDependencies": {
+    "bankai": "^5.2.1",
+    "bel": "^4.5.1",
+    "dependency-check": "^2.7.0",
+    "istanbul": "^0.4.5",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
+  }
+}
