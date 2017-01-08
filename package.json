@@ -1,6 +1,6 @@
 {
   "name": "on-intersect",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Call back when an element intersects with another",
   "main": "index.js",
   "scripts": {
