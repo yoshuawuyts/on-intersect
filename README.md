@@ -10,17 +10,7 @@ var intersectExists = require('on-intersect/exists')
 var onViewport = require('on-intersect')
 var html = require('bel')
 
-var el = html`<div>hello planet!</div>`
-
-if (intersectExists()) {
-  onViewport(el, function (entry) {
-    console.log(entry.time)
-    console.log(entry.rootBounds)
-    console.log(entry.intersectionRect)
-    console.log(entry.intersectionRation)
-    console.log(entry.target)
-  })
-}
+var el = html`<h1 style="color: white">BECOME THE GOBLIN!</h1>`
 
 var main = html`
   <main>
@@ -30,6 +20,26 @@ var main = html`
 `
 
 document.body.appendChild(main)
+
+// observers should only be added _after_ the element is rendered on the DOM,
+// else it displeases the browser emperors and they _will_ warn you
+if (intersectExists()) {
+  onIntersect(el, onEnter, onExit)
+}
+
+function onEnter (entry) {
+  console.log(entry.time)
+  console.log(entry.rootBounds)
+  console.log(entry.intersectionRect)
+  console.log(entry.intersectionRatio)
+  console.log(entry.target)
+
+  document.body.setAttribute('style', 'background-color: green')
+}
+
+function onExit (entry) {
+  document.body.setAttribute('style', 'background-color: white')
+}
 ```
 
 ## API
