@@ -80,6 +80,7 @@ $ npm install on-intersect
 - [yoshuawuyts/nanocomponent](https://github.com/yoshuawuyts/nanocomponent)
 - [yoshuawuyts/nanomorph](https://github.com/yoshuawuyts/nanomorph)
 - [yoshuawuyts/nanotick](https://github.com/yoshuawuyts/nanotick)
+- [yoshuawuyts/polite-element](https://github.com/yoshuawuyts/polite-element)
 - [bendrucker/document-ready](https://github.com/bendrucker/document-ready)
 - [shama/on-load](https://github.com/shama/on-load)
 - [shama/bel](https://github.com/shama/bel)
