@@ -2,8 +2,10 @@ var intersectExists = require('./exists')
 var onIntersect = require('./')
 var html = require('bel')
 
+var stop = null
+
 var el = html`
-  <h1 style="color: white">
+  <h1 style="color: white" onclick=${onclick}>
     BEHOLD THE GOBLIN!
   </h1>
 `
@@ -21,7 +23,7 @@ document.body.appendChild(main)
 // observers should only be added _after_ the element is rendered on the DOM,
 // else it displeases the browser emperors and they _will_ warn you
 if (intersectExists()) {
-  var stop = onIntersect(el, onEnter, onExit)
+  stop = onIntersect(el, onEnter, onExit)
 }
 
 function onEnter (entry) {
@@ -37,4 +39,11 @@ function onEnter (entry) {
 function onExit (entry) {
   document.body.setAttribute('style', 'background-color: white')
   // stop()
+}
+
+function onclick () {
+  if (stop) {
+    stop()
+    stop = null
+  }
 }
