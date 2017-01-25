@@ -36,5 +36,5 @@ function onEnter (entry) {
 
 function onExit (entry) {
   document.body.setAttribute('style', 'background-color: white')
-  stop()
+  // stop()
 }
