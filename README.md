@@ -6,84 +6,38 @@ Call back when an element intersects with another.
 
 ## Usage
 ```js
-var intersectExists = require('on-intersect/exists')
-var onViewport = require('on-intersect')
+var onIntersect = require('on-intersect')
 var html = require('bel')
 
-var el = html`
-  <h1 style="color: white">
-    BEHOLD THE GOBLIN!
-  </h1>
-`
+var el = html`<h1>Yay, we're a heading!</h1>`
 
-var main = html`
+onIntersect(el, function () {
+  console.log('Woot, component is visible!')
+})
+
+document.body.appendChild(html`
   <main>
     <div style="height: 110vh"></div>
     ${el}
     <div style="height: 110vh"></div>
   </main>
-`
-
-document.body.appendChild(main)
-
-// observers should only be added _after_ the element is rendered on the DOM,
-// else it displeases the browser emperors and they _will_ warn you
-if (intersectExists()) {
-  var stopObserving = onIntersect(el, onEnter, onExit)
-}
-
-function onEnter (entry) {
-  console.log(entry.time)
-  console.log(entry.rootBounds)
-  console.log(entry.intersectionRect)
-  console.log(entry.intersectionRatio)
-  console.log(entry.target)
-
-  document.body.setAttribute('style', 'background-color: green')
-}
-
-function onExit (entry) {
-  document.body.setAttribute('style', 'background-color: white')
-  stopObserving()
-}
+`)
 ```
 
 ## API
-### stopObserving = onViewport(elementOrObject, [onEnter|null], [onExit])
-Call a callback when an element intersects with another. Defaults to
-`document.body`. The first argument can either be an HTML Node or an object. If
-it's an object it must contain a `target` which is an HTML node. Options can be:
-- __target:__ The element that is being observed
-- __root:__ The element that is used as the viewport for checking visiblity of
-  the target. Defaults to the browser viewport.
-- __rootMargin:__ Margin around the root. Can have values similar to the css
-  margin property: `"10px 20px 30px 40px"` (top, right, bottom, left). If the
-  root element is specified % values can be used.
-- __threshold:__ Number or array of numbers to indicate at what % of visiblity
-  of the target the observer should trigger. eg: trigger for every 25 percent
-  that comes into view: [0, 0.25, 0.5, 0.75, 1]. Will call `onEnter` every time
-  the threshold is passed. `threshold` defaults to 1.
+### stopObserving = onViewport(element, [opts], [onEnter], [onExit])
+Call `onEnter` when an element scrolls into view, and `onExit` when an element
+scrolls out of view.  `opts` can be any value passed into the
+[InterSectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
+constructor.
 
 ### stopObserving()
-Unregister the observer
-
-### bool = intersectExists()
-Check if `window.InterSectionObserver` exists
+Stop the observer.
 
 ## Installation
 ```sh
 $ npm install on-intersect
 ```
-
-## See Also
-- [yoshuawuyts/nanoraf](https://github.com/yoshawuyts/nanoraf)
-- [yoshuawuyts/nanocomponent](https://github.com/yoshuawuyts/nanocomponent)
-- [yoshuawuyts/nanomorph](https://github.com/yoshuawuyts/nanomorph)
-- [yoshuawuyts/nanotick](https://github.com/yoshuawuyts/nanotick)
-- [yoshuawuyts/polite-element](https://github.com/yoshuawuyts/polite-element)
-- [bendrucker/document-ready](https://github.com/bendrucker/document-ready)
-- [shama/on-load](https://github.com/shama/on-load)
-- [shama/bel](https://github.com/shama/bel)
 
 ## Further Reading
 - [MDN/Intersection_Observer_API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
