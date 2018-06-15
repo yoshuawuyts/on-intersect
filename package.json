@@ -17,10 +17,7 @@
     "api"
   ],
   "license": "MIT",
-  "dependencies": {
-    "global": "^4.3.1",
-    "is-dom": "^1.0.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "bankai": "^5.2.1",
     "bel": "^4.5.1",
